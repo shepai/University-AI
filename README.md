@@ -1,6 +1,7 @@
 This project is for holding the files of the chat bot files.
 
 ====================================================================================================
+
 Project overview
 
 Taking a step back from self learning AI, we have made the SHEP chatbot. Self learning AI poses many problems, such as learning off of the wrong information. The spread of fake news is a major problem in todays society. Having a self learning chatbot is fun and in some makes things better but can make things a lot worse. Take the microsoft AI which was converted to Nazism by internet trolls.
