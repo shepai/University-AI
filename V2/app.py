@@ -12,6 +12,7 @@ Admins=[]
 #file.close()
 #codes=r.split("-")
 codes=["",""]
+#on server ths is shepadmin-pass
 print("opening server")
 async def clientReply(websocket, path):
     try:

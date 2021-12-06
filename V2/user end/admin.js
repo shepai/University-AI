@@ -37,7 +37,7 @@ var con,
     typeOfDisplay = "",
     letIn = !1;
 function connect() {
-    ((con = new WebSocket("ws://192.168.0.13:8080")).onopen = function () {
+    ((con = new WebSocket("ws://80.5.202.49:8080")).onopen = function () {
         con.send("Connect");
     }),
         (con.onerror = function (e) {
@@ -105,7 +105,7 @@ function viewReport() {
             : alert("Sign in to do this");
 }
 function viewAll() {
-	
+
     (stack = new Stack()),
         console.log("view"),
         1 == letIn
@@ -145,7 +145,7 @@ function addQ(e) {
              }else{ alert("Please decrease your message size");}
 			 */
 	}else{alert("Sign in to do this");}
-			
+
 }
 function submitVals() {
 	if(letIn){
@@ -157,20 +157,20 @@ function submitVals() {
 		if(a.length < 400){
                   if(null == a || "" == a)
 				  { alert("cancelled");
-					
+
 				  }else{
 						con.send("ADD" + q + "---" + a +"---"+date);
 						document.getElementById(e).remove();
 						document.getElementById('Information').value="";
 						document.getElementById('deleteBy').value="none";
 						modal.style.display = "none";
-					
+
 					}
-					
+
         }else{ alert("Please decrease your message size");}
-		
-		
-		
+
+
+
 	}
 }
 function addR(e) {
