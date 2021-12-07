@@ -10,19 +10,16 @@
 </head>
 <body class="backgroundC">
 <div class="topnav">
-<a align="left" class="topnavlogo"><img src="assets/eyeT.png" width="50px" height="50px"></a>
+<a align="left" href="index.html" class="topnavlogo"><img src="assets/eyeT.png" width="50px" height="50px"></a>
 <p class="title" align="center">Chatbot version 2 (Beta)</p>
 <a class="topnavleft" href="main.html">ChatBot</a>
 <a class="topnavleft" href="admin.html">Sign in</a>
 <script src="jquery.js">
 	</script>
 
-	<script src="search.js">
-
-</script>
 </div>
 	<!-- the main content -->
-	<br>
+	<br><br><br><br>
 	<div class="main">
 		<div align="center" class="iconPage">
 
@@ -47,14 +44,17 @@
 		<div id="mainContent" class="messageActivate">
 
 		</div>
+
 		</div>
-		<br><br><br><br>
-		<div align="center" class="sendMessage">
+		<br><br><br><br><br><br>
+
+		<div id="message" align="center" class="sendMessage">
 		<br>
 			<input  type="text" id="messageFAQ" class="messageBox" name="fname"><button onClick="enterMessage()" class="FAQButton" value="send">send</button>
 		</div>
 
-
+		<a class="text link" href="#" style="position:fixed; bottom:0px;" script="document.getElementById("mySelect").innerHTML=string;">
+			<h6 style="position:absolute; bottom:0px;">Sign out</h6></a>
 </body>
 
 <script src="chat.js">
@@ -80,6 +80,8 @@ window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
+	document.getElementById("message").class="";
+	document.getElementById("message").class"text link";
 }
 
 		</script>

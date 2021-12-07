@@ -1,8 +1,29 @@
 .backgroundC {
 	background-color:#141111;
 	font-family: Arial, Helvetica, sans-serif;
-	background-image: url('backgrounds/hyper.png');
-	background-size: 12%;
+
+	/* overflow-y: hidden; Hide vertical scrollbar */
+  overflow-x: hidden;
+}
+
+.text {
+	color:white;
+	text-decoration:none;
+}
+
+.link {
+
+  text-decoration: underline;
+}
+.button {
+	background-color:#8c0114;
+	color: white;
+	width:800px;
+	height: 100px;
+	border: 0px solid;
+	margin:0 auto;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .watermark {
@@ -83,10 +104,8 @@ table {
 .messageActivate {
 	margin: auto;
 	width:70%;
-
-	height:auto;
+  height: auto
 	display:block;
-
 }
 .shepMessage {
 	border-radius: 25px;
@@ -146,6 +165,8 @@ table {
 	padding: 10px 0;
 	margin: auto;
 	display:block;
+	position:fixed;
+	bottom:0px;
 
 }
 .bottomWidget {
@@ -186,6 +207,7 @@ table {
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
+
 }
 .break {
 	width:90%;
@@ -200,14 +222,21 @@ table {
   text-decoration: none;
   font-size: 20px;
   width:100%;
+	position:fixed;
+	margin: 0;
+  padding : 0;
 }
 
 .main {
   display: table;
   width:65%;
+	height: 10px;
 	color: white;
   margin-right: auto;
   margin-left: auto;
+
+	overflow-y:scroll;
+	overflow: auto;
 
 }
 .title {
@@ -277,6 +306,11 @@ only screen and (max-width: 760px),
 		width:25;
 		height:25px;
 	}
+	.button {
+		width:80%;
+		height:100px;
+	}
+
 	.topnav a {
 
 	  padding: 5px 10px;
