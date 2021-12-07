@@ -7,11 +7,11 @@
 	<link rel="stylesheet" type="text/css" href="Botstyle.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="shortcut icon" href="assets/pal.ico" type="favicon/ico">
+	<link rel="shortcut icon" href="assets/test1.ico" type="favicon/ico">
 </head>
 <body class="backgroundC">
 <div class="topnav">
-<a align="left" class="topnavlogo"><img src="assets/pal.jpg" width="50px" height="50px"></a>
+<a align="left" class="topnavlogo"><img src="assets/eyeT.png" width="50px" height="50px"></a>
 <p class="title" align="center">Chatbot version 2 (Beta)</p>
 <a class="topnavleft" href="main.html">ChatBot</a>
 <a class="topnavleft" href="admin.html">Sign in</a>
@@ -19,7 +19,7 @@
 	</script>
 
 	<script src="search.js">
-    
+
 </script>
 
 </div>
@@ -27,15 +27,15 @@
 	<br>
 	<div class="main">
 		<div align="center" class="iconPage">
-			
+
 		</div>
 		<h1 class="headerText">Sign in</h1>
 		<hr class="break">
-		
+
 		<h3 class="contentText">This application is for the administration staff to add responses to questions,
 		change incorrect information, and delete responses. When viewing, left click to add a response, right click to delete.</h3>
 		<div id="mainContent" class="messageActivate">
-			
+
 		</div>
 		<div align="center" id="alertAdd" style="display: none;">
 		<h4>Add</h4>
@@ -44,14 +44,14 @@
 			<h5>Answer</h5>
 			<input class="messageBox" type="text" id="inputQ2" style="outline-color:black;outline-width=1px;outline-style: dotted;" />
 			<br><br>
-			<button onclick="saveQuestionAnswer()" class="" >Submit</button> 
+			<button onclick="saveQuestionAnswer()" class="" >Submit</button>
 		</div>
 		<div align="center" id="alertDelete" style="display: none;">
 		<h4>Delete</h4>
 			<h5>Question</h5>
 			<input class="messageBox" type="text" id="inputD1" style="outline-color:black;outline-width=1px;outline-style: dotted;" />
 			<br><br>
-			<button onclick="delQuestionAnswer()" class="" >Submit</button> 
+			<button onclick="delQuestionAnswer()" class="" >Submit</button>
 		</div>
 		<div id="signIn" align="center">
 		<h5>Sign in name</h5>
@@ -64,14 +64,14 @@
 			<input type="text" id="decryptKey" class="messageBox" style="outline-color:black;outline-width=1px;outline-style: dotted;" name="fname">
 			-->
 			<br><br>
-			<button onclick="signIn()" class="" >Sign in</button> 
+			<button onclick="signIn()" class="" >Sign in</button>
 		</div>
 		<br><br><br>
 		<div style="display: none;" id="View">
 		<!--This area remains hidden until the user -->
 			<h3>To add</h3>
-			
-			
+
+
 		</div>
 		<div id="addForm" class="modal">
 
@@ -82,7 +82,7 @@
 			<h3 id="showQ"></h3>
 			<p>Item to add</p>
 			<input id="Information">
-			
+
 			<p>When to delete it (optional)</p>
 			<input type="date" id="deleteBy" name="trip-start"
        value="none"
@@ -91,24 +91,24 @@
 		  </div>
 
 		</div>
-		
+
 		<br><br>
 		</div>
-		
+
 		<div align="center" class="sendMessage">
 
-			<button class="FAQButton" onClick="viewAll()">View to add</button> 
+			<button class="FAQButton" onClick="viewAll()">View to add</button>
 
 			<button class="FAQButton" onClick="addOwn()">Add own</button>
 			<button class="FAQButton" onClick="deleteOwn()">Delete</button>
 			<button class="FAQButton" onClick="viewReport()" >View reports</button>
-			
-			
+
+
 			</div>
-	
-	
+
+
 </body>
-	
+
 <script src="admin.js">
 
 </script>
