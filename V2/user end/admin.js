@@ -123,7 +123,7 @@ function viewAll() {
 function signIn() {
     var e = document.getElementById("uname").value,
         t = document.getElementById("paswo").value;
-    if("-+-+" in e || "-+-+" in t || "--" in e || "--" in t) //invalid characters
+    if(e.includes("-+-+") || t.includes("-+-+") || e.includes("--") || t.includes("--")) //invalid characters
     {
       alert("Use of invalid characters in either your username or password");
     }else{
