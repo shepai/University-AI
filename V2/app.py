@@ -13,11 +13,11 @@ Admins=[]
 #r=file.read()
 #file.close()
 #codes=r.split("-")
-codes=["",""]
+codes={}
 orgs={}
-def save(self,orgs):
-    with open("organisation.json", 'w', encoding='utf-8') as f:
-        json.dump(orgs, f)
+def save(self,dat,fl="organisation.json"):
+    with open(fl, 'w', encoding='utf-8') as f:
+        json.dump(dat, f)
 try:
     file=open("organisation.json") #read file
     r=file.read()
@@ -25,6 +25,10 @@ try:
     tmp = json.loads(r) #convert to dictionary
     for key in tmp:
         orgs[key]=copy.deepcopy(Bot(key)) #create all objects
+    file=open("codes.json") #read file
+    r=file.read()
+    file.close()
+    codes = json.loads(r) #convert to dictionary
 except:
     pass
 #on server ths is shepadmin-pass
@@ -64,17 +68,24 @@ async def adminReply(websocket, path):
     try:
         async for message in websocket:
             #will need to split down
+            parts=message.split("-+-+") #code to split org and codes
+            message=parts[1] #store message
+            organisation=parts[0] #store username login
             if "signInRequest:" in message:
                 #sign in
                 message=message.replace("signInRequest:","")
                 message=message.split("--")
-                if message[0]==codes[0] and message[1]==codes[1]:
+                if codes.get(message[0],None)!=None and codes.get(message[0])==message[1]:
+                    #if exists and is set to password
                     print(websocket,"has joined the administration")
                     Admins.append(websocket)
                     await websocket.send("signInRequestGranted")
                 else:
                     await websocket.send("ERROR")
             elif message=="VIEWDATA" and websocket in Admins:
+                uniBot=orgs[organisation]
+                client=botClient(uniBot) #set up client in memory
+                admin=adminBot(uniBot) #set up admin
                 print("view")
                 #return the data
                 string=""
@@ -134,10 +145,13 @@ async def assign(websocket, path):
                 await websocket.send(">>>"+str)
             elif "ADD" in message:
                 message=message.remove("ADD")
-                if message not in list(orgs.keys()):
-                    uniBot=Bot(message) #set up in memory
-                    orgs[message]=copy.deepcopy(uniBot)
+                message=message.split(":::")
+                if message[0] not in list(orgs.keys()):
+                    uniBot=Bot(message[0]) #set up in memory
+                    orgs[message[0]]=copy.deepcopy(uniBot) #save bot to orgs
                     save(orgs)
+                    codes[message[0]]=message[1] #save name to Passwords
+                    save(codes,fl="codes.json")
                     await websockets.send("Success")
                 else:
                     await websocket.send("Already signed up")

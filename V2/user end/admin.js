@@ -36,9 +36,11 @@ var con,
     ps = "",
     typeOfDisplay = "",
     letIn = !1;
+
+var username="";
 function connect() {
     ((con = new WebSocket("ws://80.5.202.49:8080")).onopen = function () {
-        con.send("Connect");
+        con.send(username+"-+-+"+"Connect");
     }),
         (con.onerror = function (e) {
             alert("Error");
@@ -101,7 +103,7 @@ function viewReport() {
               (document.getElementById("View").style.display = "block"),
               (document.getElementById("alertAdd").style.display = "none"),
               (document.getElementById("alertDelete").style.display = "none"),
-              con.send("REPORT"))
+              con.send(username+"-+-+"+"REPORT"))
             : alert("Sign in to do this");
 }
 function viewAll() {
@@ -115,14 +117,21 @@ function viewAll() {
               (document.getElementById("View").style.display = "block"),
               (document.getElementById("alertAdd").style.display = "none"),
               (document.getElementById("alertDelete").style.display = "none"),
-              con.send("VIEWDATA"))
+              con.send(username+"-+-+"+"VIEWDATA"))
             : alert("Sign in to do this");
 }
 function signIn() {
     var e = document.getElementById("uname").value,
         t = document.getElementById("paswo").value;
-    con.send("signInRequest:" + e + "--" + t), (us = e), (ps = t);
+    if("-+-+" in e || "-+-+" in t || "--" in e || "--" in t) //invalid characters
+    {
+      alert("Use of invalid characters in either your username or password");
+    }else{
+      username=e;
+      con.send(username+"-+-+"+"signInRequest:" + e + "--" + t), (us = e), (ps = t);
+    }
 }
+
 function addQ(e) {
     var t, n;
     console.log("add");
@@ -159,7 +168,7 @@ function submitVals() {
 				  { alert("cancelled");
 
 				  }else{
-						con.send("ADD" + q + "---" + a +"---"+date);
+						con.send(username+"-+-+"+"ADD" + q + "---" + a +"---"+date);
 						document.getElementById(e).remove();
 						document.getElementById('Information').value="";
 						document.getElementById('deleteBy').value="none";
@@ -182,7 +191,7 @@ function addR(e) {
           (n = (n = (n = (n = (n = prompt("Please enter Your response", "")).replace("---", "")).replace(":::", "")).replace("signInRequest:", "")).replace("DELETE", "delete")).length < 500
               ? null == n || "" == n
                   ? alert("cancelled")
-                  : (con.send("RADD" + t + "---" + n), document.getElementById(e).remove(), document.getElementById(e).remove())
+                  : (con.send(username+"-+-+"+"RADD" + t + "---" + n), document.getElementById(e).remove(), document.getElementById(e).remove())
               : alert("Please decrease your message size"))
         : alert("Sign in to do this");
 }
@@ -190,17 +199,17 @@ function Delete(e) {
     var t;
     console.log("delete"),
         letIn
-            ? (document.getElementById(e).remove(), (t = document.getElementById(e).textContent), con.send("DELETE" + t), document.getElementById(e).remove(), document.getElementById(e).remove(), stack.push(t))
+            ? (document.getElementById(e).remove(), (t = document.getElementById(e).textContent), con.send(username+"-+-+"+"DELETE" + t), document.getElementById(e).remove(), document.getElementById(e).remove(), stack.push(t))
             : alert("Sign in to do this");
 }
 function undo() {
     var e;
-    stack.isEmpty() || ((e = stack.pop()), "V" == typeOfDisplay ? (con.send("QADD" + e), viewAll()) : (con.send("FADD" + e), viewFeedback()));
+    stack.isEmpty() || ((e = stack.pop()), "V" == typeOfDisplay ? (con.send(username+"-+-+"+"QADD" + e), viewAll()) : (con.send(username+"-+-+"+"FADD" + e), viewFeedback()));
 }
 function DeleteR(e) {
     var t;
     console.log("delete reported"),
-        letIn ? (document.getElementById(e).remove(), (t = document.getElementById(e).textContent), con.send("DELETER" + t), document.getElementById(e).remove(), document.getElementById(e).remove()) : alert("Sign in to do this");
+        letIn ? (document.getElementById(e).remove(), (t = document.getElementById(e).textContent), con.send(username+"-+-+"+"DELETER" + t), document.getElementById(e).remove(), document.getElementById(e).remove()) : alert("Sign in to do this");
 }
 
 
@@ -218,7 +227,7 @@ function saveQuestionAnswer() {
           (t = (t = (t = (t = (t = (t = (t = t.replace("---", "")).replace(":", "")).toLowerCase()).replace("?", "")).replace(".", "")).replace(",", "")).replace("DELETE", "delete")),
           (e = (e = (e = e.replace("---", "")).replace(":::", "")).replace("DELETE", "delete")).length + t.length < 530
               ? "" != t && "" != e
-                  ? (con.send("ADD" + t + "---" + e+"---"+document.getElementById('inputQ3').value), (document.getElementById("inputQ1").value = ""), (document.getElementById("inputQ2").value = ""))
+                  ? (con.send(username+"-+-+"+"ADD" + t + "---" + e+"---"+document.getElementById('inputQ3').value), (document.getElementById("inputQ1").value = ""), (document.getElementById("inputQ2").value = ""))
                   : alert("You cannot add that")
               : alert("Please decrease your message size"))
         : alert("Sign in to do this");
@@ -228,7 +237,7 @@ function delQuestionAnswer() {
     letIn
         ? (e = (e = (e = (e = (e = document.getElementById("inputD1").value).replace("---", "")).replace(":::", "")).replace("DELETE", "delete")).toLowerCase()).length < 500
             ? "" != e
-                ? (con.send("DELQUE" + e), (document.getElementById("inputD1").value = ""))
+                ? (con.send(username+"-+-+"+"DELQUE" + e), (document.getElementById("inputD1").value = ""))
                 : alert("You cannot delete that")
             : alert("Please decrease your message size")
         : alert("Sign in to do this");
