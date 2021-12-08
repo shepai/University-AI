@@ -17,7 +17,8 @@
 <a class="topnavleft" href="admin.html">Sign in</a>
 <script src="jquery.js">
 	</script>
-
+	<script src="inst.js">
+		</script>
 </div>
 	<!-- the main content -->
 	<br><br><br><br>
@@ -43,7 +44,9 @@
 <script>
 function action()
 {
-	console.log("action");
+	var user = document.getElementById("mySelect").value;
+	setCookie("username", user, 30);
+	console.log("action",user);
 }
 function setCookie(cname, cvalue, exdays) {
 	const d = new Date();
@@ -70,22 +73,8 @@ console.log(document.cookie);
 //find whether the user has singned in before
 
 if (getCookie("username")!=""){
-
+	//if name exists proceed to chat page
 }
-//get list of institutions and make list
-list=["a","b","c"];
-populate(list);
-function populate(Array)
-{
-	var a = "<option value=''>";
-	var b = "</option>";
-	var string="";
-	for (var i=0;i<Array.length;i++)
-	{
-		string+=a+Array[i]+b;
-	}
-	document.getElementById("mySelect").innerHTML=string;
 
-}
 
 </script>
