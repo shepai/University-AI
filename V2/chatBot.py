@@ -21,7 +21,7 @@ class ConfusedFile:
     #the confused file to store and count the unanswered items
     def __init__(self):
         try:
-            file=open(SYSTEM_PATHWAY+"confused.json") #read file
+            file=open(SYSTEM_PATHWAY+self.name+"_confused.json") #read file
             r=file.read()
             file.close()
             self.confused = json.loads(r) #convert to dictionary
@@ -45,7 +45,7 @@ class ConfusedFile:
         for i in self.confused: #sort into order
             insertion=False
             count=0
-            while count<len(arr) and not insertion: 
+            while count<len(arr) and not insertion:
                 if pos[count]<self.confused[i]: #higher prob
                     arr.insert(count, i) #insert at position
                     pos.insert(count,self.confused[i])
@@ -65,17 +65,17 @@ class ConfusedFile:
                 break #pointless to keep looping
         self.save()
     def save(self):
-        with open(SYSTEM_PATHWAY+"confused.json", 'w', encoding='utf-8') as f:
+        with open(SYSTEM_PATHWAY+self.name+"_confused.json", 'w', encoding='utf-8') as f:
             json.dump(self.confused, f)
 class logFile:
     def __init__(self,name=""):
-        if not os.path.isdir("infoFiles/"):
-            os.mkdir("infoFiles/") #set aside area for logFiles
+        if not os.path.isdir(self.name+"_infoFiles/"):
+            os.mkdir(self.name+"_infoFiles/") #set aside area for logFiles
         if name!="":
             self.name=name
             #open file
             try:
-                file=open(SYSTEM_PATHWAY+"infoFiles/"+self.name+".json") #read file
+                file=open(SYSTEM_PATHWAY+self.name+"_infoFiles/"+self.name+".json") #read file
                 r=file.read()
                 file.close()
                 self.convo = json.loads(r) #convert to dictionary
@@ -131,7 +131,7 @@ class logFile:
             subs=["noSub"]
         return subs
     def save(self):
-        with open(SYSTEM_PATHWAY+"infoFiles/"+self.name+".json", 'w', encoding='utf-8') as f:
+        with open(SYSTEM_PATHWAY+self.name+"_infoFiles/"+self.name+".json", 'w', encoding='utf-8') as f:
             json.dump(self.convo, f)
 class Bot:
     #main chatbot code to bind together the language and memory
@@ -141,7 +141,7 @@ class Bot:
         self.systemPath=systemPath
         SYSTEM_PATHWAY=systemPath #set the global
         try:
-            file=open(SYSTEM_PATHWAY+"topics.json") #read file
+            file=open(SYSTEM_PATHWAY+self.name+"_topics.json") #read file
             r=file.read()
             file.close()
             self.topics = json.loads(r) #convert to dictionary
@@ -149,7 +149,7 @@ class Bot:
             self.topics={} #store each topic
         self.confused=ConfusedFile()
         try:
-            file=open(SYSTEM_PATHWAY+"reports.json") #read file
+            file=open(SYSTEM_PATHWAY+self.name+"_reports.json") #read file
             r=file.read()
             file.close()
             self.reports = json.loads(r) #convert to dictionary
@@ -215,7 +215,7 @@ class Bot:
         logs=[]
         for i in topics: #get all logfiles
             logs+=self.topics.get(i,[])
-        
+
         for log in logs:
             log=logFile(name=log)
             log.delete(message)
@@ -225,9 +225,9 @@ class Bot:
         self.reports[message]=self.reports.get(message,0)+1
         self.save()
     def save(self):
-        with open(SYSTEM_PATHWAY+"topics"+".json", 'w', encoding='utf-8') as f:
+        with open(SYSTEM_PATHWAY+self.name+"_topics"+".json", 'w', encoding='utf-8') as f:
             json.dump(self.topics, f)
-        with open(SYSTEM_PATHWAY+"reports"+".json", 'w', encoding='utf-8') as f:
+        with open(SYSTEM_PATHWAY+self.name+"_reports"+".json", 'w', encoding='utf-8') as f:
             json.dump(self.reports, f)
 class botClient:
     #built to use less memory and provide an interface with the main bot
