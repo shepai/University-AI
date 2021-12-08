@@ -165,7 +165,7 @@ table {
 }
 .sendMessage {
 	/*position:fixed*/
-	border-radius: 15px;
+
 	width:100%;
 	height:50px;
 	background-color:#8c0114;
@@ -229,7 +229,7 @@ table {
   font-size: 20px;
   width:100%;
 	position:fixed;
-	height:60px;
+	height:80px;
 }
 
 .main {
@@ -329,7 +329,9 @@ only screen and (max-width: 760px),
 		font-size: 7px;
 		height:15px;
 	}
-
+	.topnav {
+		height:60px;
+	}
 	.messageBox {
 		border-radius: 25px;
 		background-color:white;
