@@ -41,7 +41,7 @@ con.onmessage = function(e) {
 };
 var startNum = 0;
 var num = 0;
-
+var modal = document.getElementById("myModal");
 function enterMessage() {
 	console.log("test");
 	var text = document.getElementById("messageFAQ").value;
@@ -122,13 +122,13 @@ function toPython(usrdata) {
 		dataType: "json",
 		success: function(data) {
 			console.log("connected");
-			console.log(data)
+			console.log(data);
 		}
 	})
 }
 document.getElementById("messageFAQ").addEventListener("keyup", function(event) {
 	if(event.keyCode === 13) {
-		enterMessage()
+		enterMessage();
     window.scrollTo(0,document.body.scrollHeight);
 	}
 });
