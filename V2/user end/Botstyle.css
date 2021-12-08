@@ -1,3 +1,7 @@
+*{
+	margin: 0;
+}
+
 .backgroundC {
 	background-color:#141111;
 	font-family: Arial, Helvetica, sans-serif;
@@ -11,6 +15,9 @@
 	text-decoration:none;
 }
 
+.bottomWid{
+	overflow: visible;
+}
 .link {
 
   text-decoration: underline;
@@ -163,7 +170,6 @@ table {
 	height:50px;
 	background-color:#8c0114;
 	padding: 10px 0;
-	margin: auto;
 	display:block;
 	position:fixed;
 	bottom:0px;
@@ -171,7 +177,7 @@ table {
 }
 .bottomWidget {
 
-	float:right;
+
 	width:300px;
 	height:100px;
 	background-color:#ff726e;
@@ -223,8 +229,7 @@ table {
   font-size: 20px;
   width:100%;
 	position:fixed;
-	margin: 0;
-  padding : 0;
+	height:60px;
 }
 
 .main {
