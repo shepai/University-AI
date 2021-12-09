@@ -2,7 +2,7 @@ var con = new WebSocket("ws://80.5.202.49:50007");
 var lastMessage = "";
 var lastAnswer = "";
 var subs = "";
-var username=;
+var username="";
 con.onopen = function() {
 	con.send("hi" + "---" + "");
 	window.scrollTo(0, document.body.scrollHeight);
