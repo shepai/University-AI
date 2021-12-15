@@ -227,7 +227,9 @@ function saveQuestionAnswer() {
           (t = (t = (t = (t = (t = (t = (t = t.replace("---", "")).replace(":", "")).toLowerCase()).replace("?", "")).replace(".", "")).replace(",", "")).replace("DELETE", "delete")),
           (e = (e = (e = e.replace("---", "")).replace(":::", "")).replace("DELETE", "delete")).length + t.length < 530
               ? "" != t && "" != e
-                  ? (con.send(username+"-+-+"+"ADD" + t + "---" + e+"---"+document.getElementById('inputQ3').value), (document.getElementById("inputQ1").value = ""), (document.getElementById("inputQ2").value = ""))
+                  ? (con.send(username+"-+-+"+"ADD" + t + "---" + e+"---"), 
+                  (document.getElementById("inputQ1").value = ""),
+                  (document.getElementById("inputQ2").value = ""))
                   : alert("You cannot add that")
               : alert("Please decrease your message size"))
         : alert("Sign in to do this");

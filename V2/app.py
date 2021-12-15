@@ -61,6 +61,8 @@ async def clientReply(websocket, path):
                         arr.append(i)
                     x=client.Enter(message[0])
                     await websocket.send(x+"---")
+            else:
+                await websocket.send("Invalid code")
     except websockets.exceptions.ConnectionClosedError:
             print("User disconnected")
 async def adminReply(websocket, path):

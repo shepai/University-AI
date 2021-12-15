@@ -10,14 +10,16 @@ con.onerror = function(error) {
 list=[];
 con.onmessage = function(e) {
 	console.log("message:" + e.data);
-	var vals = e.data.split(">>>");
-  if(vals.length>1)//if list sent
-  {
-    list=vals.split(":::"); //split down items
-    populate(list); //populate screen
-  }else{
-    console.log(e.data); //output success function
-  }
+	var s=e.data.replace(">>>","");
+	var vals = s.split(":::");
+  if(vals[0]=="")
+	{
+		vals=[];
+	}
+  list=vals //split down items
+	list.push("Default");
+	console.log(list);
+  populate(list); //populate screen
 };
 
 

@@ -45,8 +45,14 @@
 function action()
 {
 	var user = document.getElementById("mySelect").value;
-	setCookie("username", user, 30);
-	console.log("action",user);
+	if (user=="Default")
+	{
+		setCookie("username", "", 300);
+		console.log("action","");
+	}else{
+		setCookie("username", user, 300);
+		console.log("action",user);
+	}
 }
 function setCookie(cname, cvalue, exdays) {
 	const d = new Date();

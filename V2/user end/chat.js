@@ -3,8 +3,25 @@ var lastMessage = "";
 var lastAnswer = "";
 var subs = "";
 var username=""; //username
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+username=getCookie("username");
 con.onopen = function() {
-	con.send("hi" + "---" + "");
+	console.log("username",username);
+	con.send(username+"-+-+"+"hi" + "---" + "");
 	window.scrollTo(0, document.body.scrollHeight);
 };
 con.onerror = function(error) {
@@ -55,8 +72,9 @@ function enterMessage() {
 	text = text.replace(":::", "");
 	text = text.replace("[", "(");
 	text = text.replace("]", ")");
+	text = text.replace("-+-+", "");
 	if(text.length < 500) {
-		con.send(text + "---" + subs);
+		con.send(username+"-+-+"+text + "---" + subs);
 		lastMessage = text;
 		document.getElementById("mainContent").innerHTML += add;
 		document.getElementById("messageFAQ").value = "";
@@ -84,10 +102,11 @@ function report() {
 	text = text.replace("FEEDBACKN", "");
 	text = text.replace("FEEDBACKP", "");
 	text = text.replace(":::", "");
+	text = text.replace("-+-+", "");
 	text = text.toLowerCase();
 	if(text.length < 500) {
 		if(text != null && text != "") {
-			con.send("REPORT" + text)
+			con.send(username+"-+-+"+"REPORT" + text)
 		} else {
 			alert("Invalid input")
 		}
@@ -102,12 +121,12 @@ function feedback(id, answer) {
 
 function posFeedback() {
 	modal.style.display = "none";
-	con.send("FEEDBACKP" + lastMessage + "---" + lastAnswer)
+	con.send(username+"-+-+"+"FEEDBACKP" + lastMessage + "---" + lastAnswer)
 }
 
 function negFeedback() {
 	console.log("negative");
-	con.send("FEEDBACKN" + lastMessage);
+	con.send(username+"-+-+"+"FEEDBACKN" + lastMessage);
 	modal.style.display = "none"
 }
 
