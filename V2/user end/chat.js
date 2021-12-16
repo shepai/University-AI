@@ -1,3 +1,5 @@
+//unibotpass
+
 var con = new WebSocket("ws://80.5.202.49:50007");
 var lastMessage = "";
 var lastAnswer = "";
