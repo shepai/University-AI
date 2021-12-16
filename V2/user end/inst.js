@@ -12,12 +12,14 @@ con.onmessage = function(e) {
 	console.log("message:" + e.data);
 	var s=e.data.replace(">>>","");
 	var vals = s.split(":::");
+	vals.pop(vals.length);
+	console.log(vals);
   if(vals[0]=="")
 	{
-		vals=[];
+		vals[0]="Default";
 	}
   list=vals //split down items
-	list.push("Default");
+
 	console.log(list);
   populate(list); //populate screen
 };

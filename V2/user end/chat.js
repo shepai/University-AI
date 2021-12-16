@@ -18,8 +18,9 @@ function getCookie(cname) {
   }
   return "";
 }
-username=getCookie("username");
+
 con.onopen = function() {
+  username=getCookie("username");
 	console.log("username",username);
 	con.send(username+"-+-+"+"hi" + "---" + "");
 	window.scrollTo(0, document.body.scrollHeight);

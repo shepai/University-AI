@@ -17,24 +17,20 @@
 <a class="topnavleft" href="admin.html">Sign in</a>
 <script src="jquery.js">
 	</script>
-	<script src="inst.js">
+	<script src="signup.js">
 		</script>
 </div>
 	<!-- the main content -->
 	<br><br><br><br>
 	<div align="center" class="main">
 
-		<h5>Sign in</h5>
-
-
-			  <label for="cars">Institution name: </label>
-			  <select class="messageBox" id="mySelect">
-
-			  </select>
-			  <br><br>
-			  <input type="submit" value="Submit" onclick="action()">
-
-
+		<h1>Sign up</h1>
+      <h5>Institution name</h5>
+       <input class="messageBox" type="text" id="name" style="outline-color:black;outline-width=1px;outline-style: dotted;" />
+       <h5>Password</h5>
+       <input class="messageBox" type="text" id="pass" style="outline-color:black;outline-width=1px;outline-style: dotted;" />
+       <br><br>
+        <button onclick="submit()" class="" >Submit</button>
 	</div>
 	</body>
 
@@ -78,10 +74,6 @@ function getCookie(cname) {
 console.log(document.cookie);
 //find whether the user has singned in before
 
-if (getCookie("username")!=""){
-	//if name exists proceed to chat page
-	console.log("go to page");
-}
 
 
 </script>

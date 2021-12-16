@@ -5,14 +5,9 @@ from chatBot import Bot, botClient, adminBot
 import copy
 import json
 #"/var/www/html/"
-uniBot=Bot("SUSSEXBOT") #set up once in the memory
-client=botClient(uniBot) #set up client in memory
-admin=adminBot(uniBot) #set up admin
+
 Admins=[]
-#file=open("/home/shep/Desktop/pw.txt","r") #store codes here
-#r=file.read()
-#file.close()
-#codes=r.split("-")
+
 codes={"":"shepbotpass"}
 orgs={"":Bot("")}
 
@@ -24,8 +19,7 @@ def save(dat,fl="organisation.json"):
         dat=f
     with open(fl, 'w', encoding='utf-8') as f:
         json.dump(dat, f)
-save(orgs)
-save(codes,fl="codes.json")
+
 try:
     file=open("organisation.json") #read file
     r=file.read()
@@ -39,6 +33,8 @@ try:
     codes = json.loads(r) #convert to dictionary
 except:
     pass
+save(orgs)
+save(codes,fl="codes.json")
 #on server ths is shepadmin-pass
 print("opening server")
 async def clientReply(websocket, path):
@@ -154,7 +150,7 @@ async def assign(websocket, path):
                     str+=item+":::"
                 await websocket.send(">>>"+str)
             elif "ADD" in message:
-                message=message.remove("ADD")
+                message=message.replace("ADD","")
                 message=message.split(":::")
                 if message[0] not in list(orgs.keys()):
                     uniBot=Bot(message[0]) #set up in memory
@@ -162,7 +158,7 @@ async def assign(websocket, path):
                     save(orgs)
                     codes[message[0]]=message[1] #save name to Passwords
                     save(codes,fl="codes.json")
-                    await websockets.send("Success")
+                    await websocket.send("Success")
                 else:
                     await websocket.send("Already signed up")
     except websockets.exceptions.ConnectionClosedError:
