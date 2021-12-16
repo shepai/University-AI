@@ -19,7 +19,8 @@ LP=LP()
 SYSTEM_PATHWAY=""
 class ConfusedFile:
     #the confused file to store and count the unanswered items
-    def __init__(self):
+    def __init__(self,name):
+        self.name=name
         try:
             file=open(SYSTEM_PATHWAY+self.name+"_confused.json") #read file
             r=file.read()
@@ -68,14 +69,15 @@ class ConfusedFile:
         with open(SYSTEM_PATHWAY+self.name+"_confused.json", 'w', encoding='utf-8') as f:
             json.dump(self.confused, f)
 class logFile:
-    def __init__(self,name=""):
-        if not os.path.isdir(self.name+"_infoFiles/"):
-            os.mkdir(self.name+"_infoFiles/") #set aside area for logFiles
+    def __init__(self,name="",id=""):
+        self.nam=id
+        if not os.path.isdir(self.nam+"_infoFiles/"):
+            os.mkdir(self.nam+"_infoFiles/") #set aside area for logFiles
         if name!="":
             self.name=name
             #open file
             try:
-                file=open(SYSTEM_PATHWAY+self.name+"_infoFiles/"+self.name+".json") #read file
+                file=open(SYSTEM_PATHWAY+self.nam+"_infoFiles/"+self.name+".json") #read file
                 r=file.read()
                 file.close()
                 self.convo = json.loads(r) #convert to dictionary
@@ -120,7 +122,7 @@ class logFile:
                     if score > current: #get the largest
                         current = score
                         save=i
-        if save!="" and current!=0: #if found something
+        if save!="" and current!=0 and self.convo.get(Type,None)!=None and self.convo[Type].get(save,None)!=None: #if found something
             return self.convo[Type][save][0], current #return it as answer and probability
         return "", 0 #return nothing
     def getType(self,item):
@@ -131,7 +133,7 @@ class logFile:
             subs=["noSub"]
         return subs
     def save(self):
-        with open(SYSTEM_PATHWAY+self.name+"_infoFiles/"+self.name+".json", 'w', encoding='utf-8') as f:
+        with open(SYSTEM_PATHWAY+self.nam+"_infoFiles/"+self.name+".json", 'w', encoding='utf-8') as f:
             json.dump(self.convo, f)
 class Bot:
     #main chatbot code to bind together the language and memory
@@ -147,7 +149,7 @@ class Bot:
             self.topics = json.loads(r) #convert to dictionary
         except:
             self.topics={} #store each topic
-        self.confused=ConfusedFile()
+        self.confused=ConfusedFile(name)
         try:
             file=open(SYSTEM_PATHWAY+self.name+"_reports.json") #read file
             r=file.read()
@@ -171,7 +173,7 @@ class Bot:
         saved=""
         if logs!=[]:
             for i in topics:
-                log=logFile(name=i)
+                log=logFile(name=i,id=self.name)
                 answer,prob=log.getAnswer(message)
                 if prob>top: #save the highest probability
                     top=prob
@@ -182,7 +184,7 @@ class Bot:
                 return "This is something similar I found which may answer your question '"+saved+"'"
         else:
             for i in topics: #add topics and log files to the system
-                log=logFile(name=i)
+                log=logFile(name=i,id=self.name)
                 items=self.topics.get(i,[])
                 items.append(log.name)
                 self.topics[i]=items
@@ -199,13 +201,13 @@ class Bot:
             logs+=self.topics.get(i,[])
         if logs==[]:
             for i in topics: #add topics and log files to the system
-                log=logFile(name=i)
+                log=logFile(name=i,id=self.name)
                 items=self.topics.get(i,[])
                 if log.name not in items:
                     items.append(log.name)
                 self.topics[i]=items
         for log in topics:
-            log=logFile(name=log)
+            log=logFile(name=log,id=self.name)
             log.add(message,response,timeLimit=time)
         self.save()
     def delete(self,message):
@@ -217,7 +219,7 @@ class Bot:
             logs+=self.topics.get(i,[])
 
         for log in logs:
-            log=logFile(name=log)
+            log=logFile(name=log,id=self.name)
             log.delete(message)
         self.save()
     def report(self,message):

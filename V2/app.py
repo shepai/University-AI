@@ -13,11 +13,19 @@ Admins=[]
 #r=file.read()
 #file.close()
 #codes=r.split("-")
-codes={}
-orgs={}
-def save(self,dat,fl="organisation.json"):
+codes={"":"shepbotpass"}
+orgs={"":Bot("")}
+
+def save(dat,fl="organisation.json"):
+    f={}
+    if fl=="organisation.json":
+        for key in dat:
+            f[key]=""
+        dat=f
     with open(fl, 'w', encoding='utf-8') as f:
         json.dump(dat, f)
+save(orgs)
+save(codes,fl="codes.json")
 try:
     file=open("organisation.json") #read file
     r=file.read()
@@ -62,7 +70,7 @@ async def clientReply(websocket, path):
                     x=client.Enter(message[0])
                     await websocket.send(x+"---")
             else:
-                await websocket.send("Invalid code")
+                await websocket.send("Not recognized organisation---")
     except websockets.exceptions.ConnectionClosedError:
             print("User disconnected")
 async def adminReply(websocket, path):
