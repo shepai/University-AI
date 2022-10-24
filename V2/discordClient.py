@@ -36,6 +36,6 @@ class MyClient(discord.Client):
             pass
         return Pass
 client = MyClient()
-client.run('Nzc2NDM5ODg0Njk2MTI1NDQw.X605_g.PgjL52BfYxYCcCP8HltHENIz6DY')
+client.run('API KEY')
     
 
